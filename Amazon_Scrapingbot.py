@@ -16,8 +16,7 @@ browser.maximize_window()
 #function to go to the link
 def link_redirector():
     try:
-        click_wait=browser.find_element((By.XPATH, './/a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]'))   #//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'
-        browser.get(click_wait)
+        click_wait=browser.find_element((By.XPATH, './/a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]'))   
         browser.quit
     except Exception as e:
         print(f"Error while clicking the link: {e}")
@@ -46,25 +45,25 @@ for i in range(1):  # Adjust the range as needed (2 means 2 pages)
     time.sleep(3)
 
     # Find all product containers on the current page
-    product_Container = browser.find_elements(By.XPATH, "//div[@data-component-type='s-search-result']")    #//div[@data-component-type='s-search-result']
+    product_Container = browser.find_elements(By.XPATH, "//div[@data-component-type='s-search-result']")    
 
     # Loop through the products on the page
     for product in product_Container:
         try:
             # Get product name
-            product_Name = product.find_element(By.XPATH, ".//span[@class='a-size-base-plus a-color-base a-text-normal']").text.strip()         #.//span[@class='a-size-base-plus a-color-base a-text-normal']
+            product_Name = product.find_element(By.XPATH, ".//span[@class='a-size-base-plus a-color-base a-text-normal']").text.strip()         
         except:
             product_Name = 'Not Available'
 
         try:
             # Get product price
-            product_Price = product.find_element(By.XPATH, ".//span[@class='a-price-whole']").text.strip()              #.//span[@class='a-price-whole']
+            product_Price = product.find_element(By.XPATH, ".//span[@class='a-price-whole']").text.strip()              
         except:
             product_Price = 'Out of Stock'
 
         try:
             # Get product rating
-            product_Rating = product.find_element(By.XPATH, ".//span[@class='a-size-base s-underline-text']").text.strip()          #.//span[@class='a-size-base s-underline-text']
+            product_Rating = product.find_element(By.XPATH, ".//span[@class='a-size-base s-underline-text']").text.strip()         
         except:
             product_Rating = 'Not Available'
 
