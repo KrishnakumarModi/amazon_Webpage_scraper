@@ -14,7 +14,7 @@ browser.maximize_window()
 
 
 #function to go to the link
-def link_clicker():
+def link_redirector():
     try:
         click_wait=browser.find_element((By.XPATH, './/a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]'))   #//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal'
         browser.get(click_wait)
@@ -68,8 +68,8 @@ for i in range(1):  # Adjust the range as needed (2 means 2 pages)
         except:
             product_Rating = 'Not Available'
 
-        # click into link 
-        link_clicker()
+        # redirected into link 
+        link_redirector()
         
         try:
             # Get seller name 
@@ -96,7 +96,7 @@ df = pd.DataFrame(data)
 print(df)
 
 # Save the data to a CSV file
-#df.to_csv('amazon_products.csv', index=False)
+df.to_csv('amazon_products.csv', index=False)
 
 # Close the browser
 browser.quit()
