@@ -16,7 +16,8 @@ browser.maximize_window()
 #function to go to the link
 def link_redirector():
     try:
-        click_wait=browser.find_element((By.XPATH, './/a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]'))   
+        click_wait=browser.find_element((By.XPATH, ".//div[@data-component-type='s-search-result']")) 
+        click_wait.click()  
         browser.quit
     except Exception as e:
         print(f"Error while clicking the link: {e}")
@@ -72,7 +73,7 @@ for i in range(1):  # Adjust the range as needed (2 means 2 pages)
         
         try:
             # Get seller name 
-            product_Sellername = product.find_element(By.XPATH, ".//a[@id='sellerProfileTriggerId']").text.index(1)
+            product_Sellername = product.find_element(By.XPATH, ".//a[@id='sellerProfileTriggerId']")
             product_Sellername.text.strip()
         except:
             product_Sellername = 'Not Available'
@@ -95,7 +96,7 @@ df = pd.DataFrame(data)
 print(df)
 
 # Save the data to a CSV file
-df.to_csv('amazon_products.csv', index=False)
+#df.to_csv('amazon_products.csv', index=False)
 
 # Close the browser
 browser.quit()
