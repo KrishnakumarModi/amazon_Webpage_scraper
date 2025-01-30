@@ -8,7 +8,7 @@ import pandas as pd
 
 # Setup the browser
 service = Service(executable_path="chromedriver.exe")
-browser = webdriver.Chrome(service=service)
+browser = webdriver.Chrome(service = service)
 browser.get('https://www.amazon.in/s?rh=n%3A6612025031&fs=true&ref=lp_6612025031_sar')
 browser.maximize_window()
 
@@ -69,14 +69,21 @@ for i in range(1):  # Adjust the range as needed (2 means 2 pages)
             product_Rating = 'Not Available'
 
         # redirected into link 
-        link_redirector()
+        product_Link = product.find_element(By.LINK_TEXT, product_Name).get_attribute("href")
+            
+        browser.execute_script("window.open(arguments[0]);", product_Link)
+        browser.switch_to.window(driver.window_handles[1])
         
         try:
             # Get seller name 
-            product_Sellername = product.find_element(By.XPATH, ".//a[@id='sellerProfileTriggerId']")
-            product_Sellername.text.strip()
+            product_Sellername = [product.find_element(By.XPATH, ".//a[@id='sellerProfileTriggerId']").text.replace('',',')]
+            product_Sellername = product_Sellername[0]
         except:
             product_Sellername = 'Not Available'
+
+        # Close link tab
+        browser.close()
+        browser.switch_to.window(driver.window_handles[0])
         
         # Append the product details to the data list
         data.append({
@@ -96,7 +103,7 @@ df = pd.DataFrame(data)
 print(df)
 
 # Save the data to a CSV file
-#df.to_csv('amazon_products.csv', index=False)
+df.to_csv('amazon_products.csv', index=False)
 
 # Close the browser
 browser.quit()
