@@ -7,21 +7,11 @@ import time
 import pandas as pd
 
 # Setup the browser
-service = Service(executable_path="chromedriver.exe")
+service = Service(executable_path = "chromedriver.exe")
 browser = webdriver.Chrome(service = service)
 browser.get('https://www.amazon.in/s?rh=n%3A6612025031&fs=true&ref=lp_6612025031_sar')
 browser.maximize_window()
-
-
-#function to go to the link
-def link_redirector():
-    try:
-        click_wait=browser.find_element((By.XPATH, ".//div[@data-component-type='s-search-result']")) 
-        click_wait.click()  
-        browser.quit
-    except Exception as e:
-        print(f"Error while clicking the link: {e}")
-    
+  
 
 # Function to go to the next page
 def next_Page():
@@ -52,7 +42,7 @@ for i in range(1):  # Adjust the range as needed (2 means 2 pages)
     for product in product_Container:
         try:
             # Get product name
-            product_Name = product.find_element(By.XPATH, ".//span[@class='a-size-base-plus a-color-base a-text-normal']").text.strip()         
+            product_Name = product.find_element(By.XPATH, ".//h2[@class='a-size-base-plus a-spacing-none a-color-base a-text-normal']//span").text.strip()         
         except:
             product_Name = 'Not Available'
 
